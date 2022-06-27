@@ -1,0 +1,34 @@
+# === image resize configuration
+SetEnv IMG_RESIZE_ENABLE true
+SetEnv IMG_RESIZE_MAX_WIDTH 640
+
+# === caching configuration
+Header set Cache-Control "no-cache"
+
+DirectoryIndex index.gmi
+#ErrorDocument 404 /index.gmi
+
+RewriteEngine on
+RewriteBase /
+
+# === stop further internal redirects to /cms
+RewriteCond %{ENV:REDIRECT_STATUS} ^
+RewriteRule ^cms/ - [NC,L]
+
+# === prevent direct access to /theme
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^theme/ - [R=404,NC,L]
+
+# === discard .gmi extensions and redirect
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^(.*)\.gmi$ $1 [R=301,NC,L]
+
+# === try .gmi files without extensions
+RewriteCond %{REQUEST_FILENAME}.gmi -f
+RewriteRule ^ %{REQUEST_URI}.gmi
+
+# === render .gmi files
+RewriteCond %{REQUEST_FILENAME} \.gmi$ [NC]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ /cms/render.php%{REQUEST_URI} [E=authbypass,L]

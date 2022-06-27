@@ -1,0 +1,13 @@
+# --- DO NOT DELETE --- #
+# This file enables password protection for editing the site.
+# Set up an htpasswd file (outside of web root!) and update the path
+# setting in the AuthUserFile directive.
+# https://httpd.apache.org/docs/current/programs/htpasswd.html
+
+AuthType Basic
+AuthName "Protected"
+AuthUserFile /home/protected/lichen.htpasswd
+Require valid-user
+
+Require all denied
+Require env REDIRECT_authbypass
