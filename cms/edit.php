@@ -268,7 +268,7 @@
 		#panel_files {
 			width: 60ch;
 		}
-		
+
 		#help {
 			font-size: 0.8rem;
 			font-family: monospace;
@@ -394,9 +394,9 @@
 	</style>
 	<script>
 		'use strict';
-		
+
 		const REQ_PATH = '<?php echo $_SERVER['PATH_INFO']; ?>';
-		
+
 		function debounce(callback, delay) {
 			let id = null;
 			return (...args) => {
@@ -406,7 +406,7 @@
 				}, delay);
 			 };
 		}
-		
+
 		let contentModified = false;
 		let scrollX = 0;
 		let scrollY = 0;
@@ -414,9 +414,9 @@
 			const input = document.getElementById('content');
 			const preview = document.getElementById('preview');
 			const save = document.getElementById('save');
-			
+
 			let contentType = "text/gemini"
-			
+
 			save.disabled = !contentModified;
 			if(contentModified) {
 				save.innerText = 'Save';
@@ -428,11 +428,11 @@
 				// cross-origin content doesn't allow scroll access
 				// (user may have clicked a link)
 			}
-			
+
 			if (REQ_PATH.indexOf(".md") !== -1) {
 				contentType == "text/markdown"
 			}
-			
+
 			const res = await fetch('/cms/render.php' + REQ_PATH, {
 				method: 'POST',
 				headers: {
@@ -451,7 +451,7 @@
 			}, {once: true});
 			preview.srcdoc = await res.text();
 		}
-		
+
 		window.addEventListener('DOMContentLoaded', applyContent, {once: true});
 		window.addEventListener('DOMContentLoaded', function() {
 			const onContentInput = debounce(applyContent, 1000);
@@ -461,20 +461,20 @@
 			input.addEventListener('input', function() {
 				contentModified = true;
 			});
-			
+
 			window.addEventListener('beforeunload', function(event) {
 				if(!contentModified) return;
 				event.preventDefault();
 				return 'Unsaved changes will be lost.';
 			});
-			
+
 			const preview = document.getElementById('preview');
 			preview.addEventListener('load', function(event) {
 				// TODO: handle navigation
 				// console.log(event, event.target.contentWindow.location);
 			});
 		}, {once: true});
-		
+
 
 		// --- API --- //
 
@@ -484,7 +484,7 @@
 			let contentType = "text/gemini";
 			button.disabled = true;
 			button.innerText = 'Saving...';
-			
+
 			if (REQ_PATH.indexOf(".md") !== -1) {
 				contentType == "text/markdown"
 			}
@@ -555,7 +555,7 @@
 
 				if(res.status != 200) {
 					const body = await res.text();
-					alert('There was an error uploading the file.');
+					alert('There was an error uploading the file: ' + body);
 					throw new Error(body);
 				}
 				const newSrc = await res.text();
@@ -639,7 +639,7 @@
 				<p>Uploading<span class="throb">…</span></p>
 			</div>
 		</div>
-		
+
 		<iframe id="preview"></iframe>
 	</div>
 	<input type="file" id="upload" class="hidden" onchange="handleUpload(event);">

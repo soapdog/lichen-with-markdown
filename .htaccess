@@ -5,7 +5,7 @@ SetEnv IMG_RESIZE_MAX_WIDTH 640
 # === caching configuration
 Header set Cache-Control "no-cache"
 
-DirectoryIndex index.gmi
+DirectoryIndex index.md index.gmi
 #ErrorDocument 404 /index.gmi
 
 RewriteEngine on
@@ -24,11 +24,25 @@ RewriteCond %{REQUEST_FILENAME} -f
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule ^(.*)\.gmi$ $1 [R=301,NC,L]
 
+# === discard .md extensions and redirect
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^(.*)\.md$ $1 [R=301,NC,L]
+
+# === try .md files without extensions
+RewriteCond %{REQUEST_FILENAME}.md -f
+RewriteRule ^ %{REQUEST_URI}.md
+
 # === try .gmi files without extensions
 RewriteCond %{REQUEST_FILENAME}.gmi -f
 RewriteRule ^ %{REQUEST_URI}.gmi
 
 # === render .gmi files
 RewriteCond %{REQUEST_FILENAME} \.gmi$ [NC]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ /cms/render.php%{REQUEST_URI} [E=authbypass,L]
+
+# === render .md files
+RewriteCond %{REQUEST_FILENAME} \.md$ [NC]
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ /cms/render.php%{REQUEST_URI} [E=authbypass,L]
