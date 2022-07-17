@@ -8,6 +8,7 @@ RUN docker-php-ext-install gd
 
 WORKDIR /var/www/html
 
+# mount the root of your lichen-with-markdown directory to this volume
 VOLUME /var/www/html
 
 EXPOSE 80
