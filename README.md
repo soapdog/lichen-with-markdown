@@ -18,3 +18,20 @@ I've been toying with this using the PHP built-in development server:
 $ php81 -S localhost:8000
 ```
 
+# Apache
+
+With an apache web server, use the .htaccess in this repository (note that this htaccess file includes settings for .gmi and .md files)
+
+# Nginx
+
+With an nginx web server, use the nginx config in this repository in docs/nginx.conf (which also includes settings for .gmi and .md files)
+
+# Docker 
+
+The Dockerfile in docker/Dockerfile builds a docker image which can be used to serve lichen-with-markdown with apache,
+via something like this:
+```
+docker build -t lichen:latest .
+docker run -d -p 80:80 -v $(pwd)/lichen-with-markdown:/var/www/html lichen:latest
+```
+
