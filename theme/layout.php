@@ -8,9 +8,9 @@
 </head>
 <body>
 <header>
-	<?php if($path !== '/index.gmi'): ?>
+	<?php if($path !== '/index.gmi' && $path !== '/index.md'): ?>
 	<a href="/" class="back-link">
-		<span>&larr; &mdash; Back</span>
+		<span>&larr; Back</span>
 	</a>
 	<?php endif; ?>
 </header>
