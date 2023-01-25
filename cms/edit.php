@@ -578,15 +578,29 @@
 				}
 			?></textarea>
 			<div id="help" class="hidden">
-				<code># heading<br>## subhead<br>### sub-subhead</code>
-				<code>* bulleted<br>* list<br>* items</code>
-				<code>=> https://abc.xyz external link<br>=> /page.gmi internal link<br>=> /image.jpg image alt</code>
-				<code>```<br>preformatted</br>```</code><br>
-				<div>
-					<code>> blockquote</code>
-					<div>&nbsp;</div>
-					<a href="https://gemini.circumlunar.space/docs/cheatsheet.gmi" target="_blank">Cheatsheet</a>
-				</div>
+				
+				<?php if(substr_count($_SERVER['PATH_INFO'], '.gmi') > 0): ?>
+					
+					<code># heading<br>## subhead<br>### sub-subhead</code>
+					<code>* bulleted<br>* list<br>* items</code>
+					<code>=> https://abc.xyz external link<br>=> /page.gmi internal link<br>=> /image.jpg image alt</code>
+					<code>```<br>preformatted</br>```</code><br>
+					<div>
+						<code>> blockquote</code>
+						<div>&nbsp;</div>
+						<a href="https://gemini.circumlunar.space/docs/cheatsheet.gmi" target="_blank">Cheatsheet</a>
+					</div>
+					
+				<?php else: ?>
+
+					<code># heading<br>## subhead<br>### sub-subhead</code>
+					<code>* bulleted<br>* list<br>* items</code>
+					<code>[external link](https://abc.xyz)<br>[internal link](/page.md)<br>![image alt](/assets/image.jpg)</code>
+					<code>`preformatted`<br>> blockquote</code>
+					<a href="https://www.markdownguide.org/basic-syntax" target="_blank">Markdown cheatsheet</a>
+
+				<?php endif; ?>
+
 			</div>
 
 			<div class="controls">
