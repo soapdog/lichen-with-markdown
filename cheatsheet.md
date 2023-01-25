@@ -1,5 +1,7 @@
 # Markdown helper
 
+_This file is intented to be viewed alongside its source in the lichen cms system. You can see it as intended by following this [link](cms/edit.php/cheatsheet.md), or by right-clicking and selecting `view source`_
+
 ## Headings
 
 # Heading Level 1
@@ -30,7 +32,7 @@ Ursula K. Le Guin
 - Another
 - Also another
 
-## Horizontal rule:
+## Horizontal ruler
 
 ---
 
@@ -40,8 +42,48 @@ This is a fork of [the original php version of lichen](https://lichen.sensorstat
 
 ## A local image
 
-![Image alt text here](./assets/dandi.jpg)
+![Image alt text here](/assets/dandi.jpg)
 
 ## An external image
 
 ![Image alt text here](https://cdn.dribbble.com/users/1570563/screenshots/5955986/dandelion_illustration_final_2_4x.jpg)
+
+## Table
+
+| Syntax   | Cool? |
+| -------- | ----- |
+| Markdown | Yes   |
+| Gemini   | Yes   |
+
+## Code Block
+
+```ascii
+       _                   _ _                _
+ _   _| | ___ __ _   _  __| | |_   _ __   ___| |_
+| | | | |/ / '__| | | |/ _` | __| | '_ \ / _ \ __|
+| |_| |   <| |  | |_| | (_| | |_ _| | | |  __/ |_
+ \__,_|_|\_\_|   \__,_|\__,_|\__(_)_| |_|\___|\__|
+```
+
+## Footnote
+
+Here's a sentence with a footnote. [^1]
+
+[^1]: This is the footnote.
+
+## Heading ID
+
+### Heading with an id {#cool-id}
+
+[This is a link to the heading id](#cool-id)
+
+## Definition List
+
+term
+: definition
+
+## Escaping characters
+
+Markdown symbols needs to be escaped when not used for markdown. Backslash is used for this: \\ \# \* \_ \*\* etc.
+
+
