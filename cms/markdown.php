@@ -1,8 +1,8 @@
 <?php
 
-require_once "vendor/php-markdown-lib-9.1/Michelf/Markdown.inc.php";
+require_once "vendor/php-markdown-lib-9.1/Michelf/MarkdownExtra.inc.php";
 
-use Michelf\Markdown;
+use Michelf\MarkdownExtra;
 
 function markdown_to_html($file, $generate_headline_ids = true) {
 
@@ -15,7 +15,7 @@ function markdown_to_html($file, $generate_headline_ids = true) {
 		$source = $source . fgets($file);
 	}
 	
-	$body = Markdown::defaultTransform($source);
+	$body = MarkdownExtra::defaultTransform($source);
 	preg_match_all( '|<h[^>]+>(.*)</h[^>]+>|iU', $body, $headings );
 
 	return array("body" => $body, "title" => $headings[0]);
