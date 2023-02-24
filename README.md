@@ -1,3 +1,7 @@
+# THIS REPOSITORY MOVED
+
+This project has new maintainers who are doing amazing work moving it further than what I originally envisioned. Give them your support and grab the fresh goodies from this project's new home at https://codeberg.org/ukrudt.net/lichen-markdown
+
 # lichen-with-markdown
 
 A fork of Lichen CMS that supports Markdown and Gemtext.
